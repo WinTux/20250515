@@ -21,8 +21,8 @@ public class CambiosDeWikimediaProducer {
     public CambiosDeWikimediaProducer(KafkaTemplate<String,String> kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
-    public void enviarMensaje(String topic,String mensaje) throws InterruptedException {
-        LOGGER.info(String.format("Mensaje enviado: %s", mensaje));
+    public void enviarMensaje() throws InterruptedException {
+        String topic = "recentchanges_de_wikimedia";
         BackgroundEventHandler evento = new CambiosDeWikimediaHandler(topic, kafkaTemplate);
         String url = "https://stream.wikimedia.org/v2/stream/recentchange";
         BackgroundEventSource.Builder builder =
